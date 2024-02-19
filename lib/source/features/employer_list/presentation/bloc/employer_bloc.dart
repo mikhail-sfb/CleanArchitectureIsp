@@ -120,7 +120,6 @@ class EmployerBloc extends Bloc<EmployerEvent, GroupState> {
         emit(GroupEmpty());
         return;
       }
-
       emit(GroupsLoaded(groups: groups));
     });
   }

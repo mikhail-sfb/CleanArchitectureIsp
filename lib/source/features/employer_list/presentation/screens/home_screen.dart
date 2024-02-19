@@ -1,9 +1,10 @@
-import 'package:final_lab/features/theme/theme_provider.dart';
+import 'package:final_lab/core/widgets/app_bar.dart';
 import 'package:final_lab/source/features/employer_list/domain/entities/group.dart';
 import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
+import 'package:final_lab/source/features/employer_list/presentation/widgets/group_widget.dart';
+import 'package:final_lab/source/features/employer_list/presentation/widgets/theme_change_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 List<Group> groups = [
   const Group(groupName: 'Hi', color: 'x/ffff', employers: []),
@@ -32,16 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('App'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .switchTheme();
-              },
-              icon: const Icon(Icons.sunny))
-        ],
+      appBar: const ApplicationBar(
+        title: 'Groups',
+        actions: [ThemeIcon()],
       ),
       body: Column(
         children: [
@@ -49,26 +43,43 @@ class _HomeScreenState extends State<HomeScreen> {
             child: BlocBuilder<EmployerBloc, GroupState>(
               builder: (context, state) {
                 return state is GroupEmpty
-                    ? const Center(
+                    ? Center(
                         child: Text(
-                          'Empty',
-                          style: TextStyle(color: Colors.black),
+                          'No groups for now',
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                       )
                     : state is GroupsLoaded
                         ? GridView.builder(
+                            padding: EdgeInsets.all(
+                                MediaQuery.of(context).size.height * 0.01),
                             gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2),
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 1,
+                                    mainAxisSpacing: MediaQuery.of(context)
+                                            .size
+                                            .height *
+                                        0.01,
+                                    crossAxisSpacing:
+                                        MediaQuery.of(context).size.height *
+                                            0.01),
                             itemCount: state.groups.length,
-                            itemBuilder: (context, index) => Container(
-                              color: Colors.black,
-                              child: const Center(child: Text('created')),
-                            ),
-                          )
-                        : const Center(
-                            child: Text('wrong'),
-                          );
+                            itemBuilder: (context, index) => GroupItem(
+                                colorDeafult: true, group: state.groups[index]))
+                        : state is LocalDbError
+                            ? Center(
+                                child: Text(
+                                  state.errorMessage,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                              )
+                            : Center(
+                                child: Text(
+                                'Something went wrong',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ));
               },
             ),
           ),
