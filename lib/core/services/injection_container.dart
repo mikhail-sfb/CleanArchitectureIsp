@@ -7,7 +7,7 @@ import 'package:final_lab/source/features/employer_list/domain/usecases/add_usec
 import 'package:final_lab/source/features/employer_list/domain/usecases/delete_usecase.dart';
 import 'package:final_lab/source/features/employer_list/domain/usecases/edit_usecase.dart';
 import 'package:final_lab/source/features/employer_list/domain/usecases/get_usecase.dart';
-import 'package:final_lab/source/presentation/bloc/employer_bloc.dart';
+import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/adapters.dart';
 

@@ -1,8 +1,8 @@
 import 'package:final_lab/core/services/injection_container.dart';
 import 'package:final_lab/features/theme/app_theme.dart';
 import 'package:final_lab/features/theme/theme_provider.dart';
-import 'package:final_lab/source/presentation/bloc/employer_bloc.dart';
-import 'package:final_lab/source/presentation/screens/home_screen.dart';
+import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
+import 'package:final_lab/source/features/employer_list/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
