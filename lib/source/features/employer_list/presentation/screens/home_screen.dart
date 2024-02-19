@@ -1,3 +1,4 @@
+import 'package:final_lab/core/constants/box_name.dart';
 import 'package:final_lab/core/widgets/app_bar.dart';
 import 'package:final_lab/source/features/employer_list/domain/entities/group.dart';
 import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
@@ -5,11 +6,12 @@ import 'package:final_lab/source/features/employer_list/presentation/widgets/gro
 import 'package:final_lab/source/features/employer_list/presentation/widgets/theme_change_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 List<Group> groups = [
   const Group(groupName: 'Hi', color: 'x/ffff', employers: []),
   const Group(groupName: 'hoi', color: 'x/ffff', employers: []),
-  const Group(groupName: 'hei', color: 'x/ffff', employers: [])
+  const Group(groupName: 'hei', color: '0xFF42A5F5', employers: [])
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -27,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    //Hive.box(boxName).clear();
     _loadGroups();
   }
 
@@ -65,8 +68,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                         MediaQuery.of(context).size.height *
                                             0.01),
                             itemCount: state.groups.length,
-                            itemBuilder: (context, index) => GroupItem(
-                                colorDeafult: true, group: state.groups[index]))
+                            itemBuilder: (context, index) {
+                              bool defaultColor;
+                              Color(int.parse(state.groups[index].color)) ==
+                                      const Color(0xFF42A5F5)
+                                  ? defaultColor = true
+                                  : defaultColor = false;
+                              return GroupItem(
+                                  index: index,
+                                  colorDeafult: defaultColor,
+                                  group: state.groups[index]);
+                            })
                         : state is LocalDbError
                             ? Center(
                                 child: Text(

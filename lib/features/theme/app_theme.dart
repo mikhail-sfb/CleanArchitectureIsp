@@ -21,7 +21,7 @@ class AppThemeData {
           secondary: Color(0xff3d5a80),
         ),
         iconTheme: const IconThemeData(
-          color: Color.fromARGB(255, 60, 91, 148),
+          color: Color(0xff3d5a80),
         ),
         textTheme: GoogleFonts.nunitoTextTheme().copyWith(
             titleLarge: const TextStyle(color: Color(0xff3d5a80), fontSize: 28),

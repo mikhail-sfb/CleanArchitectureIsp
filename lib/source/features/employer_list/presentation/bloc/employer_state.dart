@@ -15,7 +15,10 @@ final class GroupsLoaded extends GroupState {
   const GroupsLoaded({required this.groups});
 
   @override
-  List<Object> get props => groups.map((e) => e.groupName).toList();
+  List<Object> get props => [
+        groups.map((e) => e.groupName).toList(),
+        groups.map((e) => e.color).toList()
+      ];
 }
 
 final class GroupEmpty extends GroupState {}

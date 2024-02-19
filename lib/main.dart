@@ -10,7 +10,8 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
-  runApp(const FinalLab());
+  runApp(
+      const MaterialApp(debugShowCheckedModeBanner: false, home: FinalLab()));
 }
 
 class FinalLab extends StatelessWidget {
