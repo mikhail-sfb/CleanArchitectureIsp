@@ -26,15 +26,21 @@ Future<void> init() async {
   sl.registerSingleton<ILocalRepo>(LocalRepoImpl(source: sl()));
 
   //*use cases
-  sl.registerSingleton<GetEmployers>(GetEmployers(repo: sl()));
+  sl.registerSingleton<GetGroups>(GetGroups(repo: sl()));
   sl.registerSingleton<AddEmployer>(AddEmployer(repo: sl()));
+  sl.registerSingleton<AddGroup>(AddGroup(repo: sl()));
   sl.registerSingleton<DeleteEmployer>(DeleteEmployer(repo: sl()));
+  sl.registerSingleton<DeleteGroup>(DeleteGroup(repo: sl()));
   sl.registerSingleton<EditEmployer>(EditEmployer(repo: sl()));
+  sl.registerSingleton<EditGroup>(EditGroup(repo: sl()));
 
   //*bloc
   sl.registerFactory<EmployerBloc>(() => EmployerBloc(
       addEmployer: sl(),
+      addGroup: sl(),
       deleteEmployer: sl(),
+      deleteGroup: sl(),
       editEmployer: sl(),
-      getEmployers: sl()));
+      editGroup: sl(),
+      getGroups: sl()));
 }

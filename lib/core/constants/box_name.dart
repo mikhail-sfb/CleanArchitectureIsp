@@ -1,1 +1,1 @@
-const String boxName = 'employers';
+const String boxName = 'groups';
