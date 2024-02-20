@@ -1,12 +1,10 @@
-import 'package:final_lab/core/constants/box_name.dart';
-import 'package:final_lab/core/widgets/app_bar.dart';
+  import 'package:final_lab/core/widgets/app_bar.dart';
 import 'package:final_lab/source/features/employer_list/domain/entities/group.dart';
 import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
 import 'package:final_lab/source/features/employer_list/presentation/widgets/group_widget.dart';
 import 'package:final_lab/source/features/employer_list/presentation/widgets/theme_change_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 
 List<Group> groups = [
   const Group(groupName: 'Hi', color: 'x/ffff', employers: []),
@@ -30,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     //Hive.box(boxName).clear();
+    //!Спросить ПАЧИМУ НЕЛЬЗЯ
     _loadGroups();
   }
 
