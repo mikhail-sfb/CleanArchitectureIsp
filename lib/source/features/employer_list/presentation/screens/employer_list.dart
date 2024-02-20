@@ -50,6 +50,8 @@ class EmployerList extends StatelessWidget {
                               DeleteEmployerEvent(
                                   employerId: index, groupId: groupId)),
                           child: EmployerTile(
+                            groupId: groupId,
+                            index: index,
                             employer: group.employers[index],
                           ))),
                 ),

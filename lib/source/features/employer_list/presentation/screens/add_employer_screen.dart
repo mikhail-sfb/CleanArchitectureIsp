@@ -15,8 +15,8 @@ class AddEmployerScreen extends StatefulWidget {
 
 class _AddEmployerScreenState extends State<AddEmployerScreen> {
   String? _picture;
-  int _age = 0;
   int _importance = 0;
+  int _age = 0;
   String _work = '';
   String _fullName = '';
   final _textFormKey = GlobalKey<FormState>();
@@ -240,7 +240,7 @@ class _AddEmployerScreenState extends State<AddEmployerScreen> {
                         return null;
                       },
                       onSaved: (newValue) {
-                        _age = int.parse(newValue!);
+                        _importance = int.parse(newValue!);
                       },
                     ),
                     const SizedBox(

@@ -2,9 +2,9 @@ import 'package:final_lab/core/widgets/app_bar.dart';
 import 'package:final_lab/source/features/employer_list/domain/entities/group.dart';
 import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
 import 'package:final_lab/source/features/employer_list/presentation/widgets/group/add_button.dart';
-import 'package:final_lab/source/features/employer_list/presentation/widgets/delete_icon_button.dart';
+import 'package:final_lab/source/features/employer_list/presentation/widgets/app_bar/delete_icon_button.dart';
 import 'package:final_lab/source/features/employer_list/presentation/widgets/group/group_view.dart';
-import 'package:final_lab/source/features/employer_list/presentation/widgets/theme_change_icon.dart';
+import 'package:final_lab/source/features/employer_list/presentation/widgets/app_bar/theme_change_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:hive/hive.dart';
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         MediaQuery.of(context).size.height *
                                             0.01),
                             itemCount: state.groups.length,
-                            itemBuilder: (context, index) {
+                            itemBuilder: (ctx, index) {
                               bool defaultColor;
                               Color(int.parse(state.groups[index].color)) ==
                                       const Color(0xFF42A5F5)

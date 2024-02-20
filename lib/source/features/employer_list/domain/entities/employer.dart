@@ -1,6 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
+const propAmountEmployer = 4;
+List<String> titles = ['Full name', 'Age', 'Work', 'Importance'];
+
 class Employer extends Equatable {
   final int age;
   final int importance;

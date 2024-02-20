@@ -33,9 +33,6 @@ class AddButton extends StatelessWidget {
                     value: BlocProvider.of<EmployerBloc>(context),
                     child: const AddGroupDialog(),
                   ));
-          // builder: ((ctx) => AddGroupDialog(
-          //       blocContext: context,
-          //     )));
         });
   }
 }
