@@ -1,12 +1,14 @@
 import 'package:final_lab/core/widgets/app_bar.dart';
 import 'package:final_lab/source/features/employer_list/domain/entities/group.dart';
 import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
-import 'package:final_lab/source/features/employer_list/presentation/widgets/add_button.dart';
+import 'package:final_lab/source/features/employer_list/presentation/widgets/group/add_button.dart';
 import 'package:final_lab/source/features/employer_list/presentation/widgets/delete_icon_button.dart';
-import 'package:final_lab/source/features/employer_list/presentation/widgets/group_view.dart';
+import 'package:final_lab/source/features/employer_list/presentation/widgets/group/group_view.dart';
 import 'package:final_lab/source/features/employer_list/presentation/widgets/theme_change_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+//import 'package:hive/hive.dart';
+//import 'package:final_lab/core/constants/box_name.dart';
 
 List<Group> groups = [
   const Group(groupName: 'Hi', color: 'x/ffff', employers: []),
@@ -109,31 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
-
-          AddButton(event: AddGroupEvent(group: groups[2])),
-          // GestureDetector(
-          //     child: Container(
-          //       height: MediaQuery.of(context).size.height * 0.06,
-          //       decoration: BoxDecoration(
-          //           color: Theme.of(context).primaryColorLight,
-          //           border: Border(
-          //               top: BorderSide(
-          //                   width: 2,
-          //                   color: Theme.of(context).primaryColorDark))),
-          //       child: Center(
-          //           child: Text(
-          //         'Add group',
-          //         style: Theme.of(context)
-          //             .textTheme
-          //             .titleMedium!
-          //             .copyWith(color: Colors.white),
-          //       )),
-          //     ),
-          //     onTap: () {
-          //       context
-          //           .read<EmployerBloc>()
-          //           .add(AddGroupEvent(group: groups[2]));
-          //     }),
+          const AddButton(title: 'group',),
         ],
       ),
     );

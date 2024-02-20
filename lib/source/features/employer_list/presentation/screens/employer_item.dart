@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:final_lab/source/features/employer_list/domain/entities/employer.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +25,7 @@ class EmployerTile extends StatelessWidget {
                   ),
                 ),
               )
-            : Image.file(employer.memoryImage!),
+            : Image.file(File(employer.memoryImage!)),
       ),
     );
   }

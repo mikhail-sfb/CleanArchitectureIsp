@@ -5,6 +5,7 @@ import 'package:final_lab/source/features/employer_list/domain/entities/group.da
 import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
 import 'package:final_lab/source/features/employer_list/presentation/screens/employer_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class GroupItem extends StatefulWidget {
@@ -61,7 +62,6 @@ class _GroupItemState extends State<GroupItem> {
                   : Color(int.parse(widget.group.color)),
               borderRadius: BorderRadius.all(
                   Radius.circular(MediaQuery.of(context).size.height * 0.03)),
-              //!
               border: Border.all(
                   width: value.toggled && widget.index == value.toggledItem
                       ? 9
@@ -132,10 +132,13 @@ class _GroupItemState extends State<GroupItem> {
             .add(EditGroupEvent(groupId: widget.index, group: newGroup));
       },
       onTap: () =>
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
         bool empty = widget.group.employers.isEmpty;
-        return EmployerList(
-            empty: empty, group: widget.group, groupId: widget.index);
+        return BlocProvider.value(
+          value: BlocProvider.of<EmployerBloc>(context),
+          child: EmployerList(
+              empty: empty, group: widget.group, groupId: widget.index),
+        );
       })),
       onLongPress: () => Provider.of<DeleteItemProvider>(context, listen: false)
           .toogleGroup(id: widget.index),

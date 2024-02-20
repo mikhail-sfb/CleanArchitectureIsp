@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:final_lab/source/features/employer_list/domain/entities/employer.dart';
 
 class EmployerModel extends Employer {
@@ -19,7 +17,7 @@ class EmployerModel extends Employer {
       'image': memoryImage,
       'importance': importance,
       'work': work,
-      'fullName': fullName
+      'fullName': fullName,
     };
   }
 
@@ -28,7 +26,7 @@ class EmployerModel extends Employer {
       age: map['age'] as int,
       importance: map['importance'] as int,
       work: map['work'] as String,
-      memoryImage: map['image'] as File,
+      memoryImage: map['image'] as String,
       fullName: map['fullName'] as String);
 
   //*to_string_source

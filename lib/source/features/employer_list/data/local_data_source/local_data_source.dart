@@ -1,4 +1,5 @@
 import 'package:final_lab/source/features/employer_list/data/local_data_source/ilocal_data_source.dart';
+import 'package:final_lab/source/features/employer_list/data/models/employer_model.dart';
 import 'package:final_lab/source/features/employer_list/data/models/group_model.dart';
 import 'package:final_lab/source/features/employer_list/domain/entities/employer.dart';
 import 'package:final_lab/source/features/employer_list/domain/entities/group.dart';
@@ -14,7 +15,7 @@ class LocalDataSource extends ILocalDataSource {
   Future<void> addEmployer(
       {required int groupId, required Employer employer}) async {
     final group = GroupModel.fromJson(box.getAt(groupId));
-    group.employers.add(employer);
+    group.employers. add(EmployerModel.toModel(employer));
     await box.putAt(groupId, group.toJson());
   }
 

@@ -1,10 +1,13 @@
 import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
+import 'package:final_lab/source/features/employer_list/presentation/screens/add_employer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AddButton extends StatelessWidget {
-  final EmployerEvent event;
-  const AddButton({required this.event,super.key});
+class AddEmployerButton extends StatelessWidget {
+  final String title;
+  final int groupId;
+  const AddEmployerButton(
+      {required this.groupId, required this.title, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class AddButton extends StatelessWidget {
                       width: 2, color: Theme.of(context).primaryColorDark))),
           child: Center(
               child: Text(
-            'Add group',
+            'Add $title',
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!
@@ -26,7 +29,13 @@ class AddButton extends StatelessWidget {
           )),
         ),
         onTap: () {
-          context.read<EmployerBloc>().add(event);
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: ((ctx) => BlocProvider.value(
+                    value: BlocProvider.of<EmployerBloc>(context),
+                    child: AddEmployerScreen(
+                      groupId: groupId,
+                    ),
+                  ))));
         });
   }
 }

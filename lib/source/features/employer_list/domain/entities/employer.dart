@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 
@@ -9,7 +7,7 @@ class Employer extends Equatable {
   final String work;
   final String fullName;
   final String id;
-  final File? memoryImage;
+  final String? memoryImage;
 
   Employer(
       {required this.age,

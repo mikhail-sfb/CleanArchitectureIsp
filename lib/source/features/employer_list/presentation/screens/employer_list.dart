@@ -2,6 +2,7 @@ import 'package:final_lab/core/widgets/app_bar.dart';
 import 'package:final_lab/source/features/employer_list/domain/entities/group.dart';
 import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
 import 'package:final_lab/source/features/employer_list/presentation/screens/employer_item.dart';
+import 'package:final_lab/source/features/employer_list/presentation/widgets/employers/add_employer_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,17 +19,18 @@ class EmployerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const ApplicationBar(title: 'Employers'),
-      body: empty
-          ? Center(
-              child: Text(
-                'No groups for now',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            )
-          : Column(
-              children: [
-                Expanded(
+        appBar: const ApplicationBar(title: 'Employers'),
+        body: Column(children: [
+          empty
+              ? Expanded(
+                  child: Center(
+                    child: Text(
+                      'No employers for now',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                )
+              : Expanded(
                   child: ListView.builder(
                       itemCount: group.employers.length,
                       itemBuilder: (context, index) => Dismissible(
@@ -50,9 +52,11 @@ class EmployerList extends StatelessWidget {
                           child: EmployerTile(
                             employer: group.employers[index],
                           ))),
-                )
-              ],
-            ),
-    );
+                ),
+          AddEmployerButton(
+            groupId: groupId,
+            title: 'employer',
+          ),
+        ]));
   }
 }

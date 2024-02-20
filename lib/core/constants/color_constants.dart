@@ -1,0 +1,1 @@
+const groupInitialColor = '0xFF42A5F5';

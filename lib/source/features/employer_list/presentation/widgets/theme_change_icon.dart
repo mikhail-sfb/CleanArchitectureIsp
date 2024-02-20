@@ -11,9 +11,8 @@ class ThemeIcon extends StatelessWidget {
         onPressed: () {
           Provider.of<ThemeProvider>(context, listen: false).switchTheme();
         },
-        icon: Icon(
-          Icons.sunny,
-          color: Theme.of(context).iconTheme.color,
+        icon: Consumer<ThemeProvider>(
+          builder: (context, value, child) => value.icon
         ));
   }
 }
