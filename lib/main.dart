@@ -1,4 +1,5 @@
 import 'package:final_lab/core/services/injection_container.dart';
+import 'package:final_lab/features/delete_item_provider.dart';
 import 'package:final_lab/features/theme/app_theme.dart';
 import 'package:final_lab/features/theme/theme_provider.dart';
 import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
@@ -20,7 +21,10 @@ class FinalLab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ThemeProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => DeleteItemProvider())
+      ],
       child: Consumer<ThemeProvider>(
         builder: (context, theme, child) => MaterialApp(
           theme: AppThemeData.lightTheme(),

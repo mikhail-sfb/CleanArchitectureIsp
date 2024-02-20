@@ -23,6 +23,8 @@ final class GroupsLoaded extends GroupState {
 
 final class GroupEmpty extends GroupState {}
 
+final class GroupAddDecline extends GroupState {}
+
 final class LocalDbError extends GroupState {
   final String errorMessage;
 

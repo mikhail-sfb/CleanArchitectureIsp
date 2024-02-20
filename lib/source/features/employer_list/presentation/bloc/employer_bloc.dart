@@ -120,6 +120,17 @@ class EmployerBloc extends Bloc<EmployerEvent, GroupState> {
         emit(GroupEmpty());
         return;
       }
+
+      //*check
+      int finalPos = groups.length - 1;
+      final position = groups
+          .indexWhere((element) => element.groupName == groups.last.groupName);
+      if (position != finalPos) {
+        emit(GroupAddDecline());
+        add(DeleteGroupEvent(groupId: finalPos));
+        return;
+      }
+
       emit(GroupsLoaded(groups: groups));
     });
   }

@@ -1,7 +1,9 @@
-  import 'package:final_lab/core/widgets/app_bar.dart';
+import 'package:final_lab/core/widgets/app_bar.dart';
 import 'package:final_lab/source/features/employer_list/domain/entities/group.dart';
 import 'package:final_lab/source/features/employer_list/presentation/bloc/employer_bloc.dart';
-import 'package:final_lab/source/features/employer_list/presentation/widgets/group_widget.dart';
+import 'package:final_lab/source/features/employer_list/presentation/widgets/add_button.dart';
+import 'package:final_lab/source/features/employer_list/presentation/widgets/delete_icon_button.dart';
+import 'package:final_lab/source/features/employer_list/presentation/widgets/group_view.dart';
 import 'package:final_lab/source/features/employer_list/presentation/widgets/theme_change_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     //Hive.box(boxName).clear();
-    //!Спросить ПАЧИМУ НЕЛЬЗЯ
     _loadGroups();
   }
 
@@ -37,12 +38,26 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: const ApplicationBar(
         title: 'Groups',
-        actions: [ThemeIcon()],
+        actions: [DeleteIcon(), ThemeIcon()],
       ),
       body: Column(
         children: [
           Expanded(
-            child: BlocBuilder<EmployerBloc, GroupState>(
+            child: BlocConsumer<EmployerBloc, GroupState>(
+              listener: (context, state) {
+                if (state is GroupAddDecline) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      duration: const Duration(seconds: 1),
+                      backgroundColor: Theme.of(context).primaryColorLight,
+                      content: Text(
+                        'The same group already existing!',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(color: Colors.white),
+                      )));
+                }
+              },
               builder: (context, state) {
                 return state is GroupEmpty
                     ? Center(
@@ -94,13 +109,31 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
-          TextButton(
-              child: const Text('dummy add'),
-              onPressed: () {
-                context
-                    .read<EmployerBloc>()
-                    .add(AddGroupEvent(group: groups[2]));
-              }),
+
+          AddButton(event: AddGroupEvent(group: groups[2])),
+          // GestureDetector(
+          //     child: Container(
+          //       height: MediaQuery.of(context).size.height * 0.06,
+          //       decoration: BoxDecoration(
+          //           color: Theme.of(context).primaryColorLight,
+          //           border: Border(
+          //               top: BorderSide(
+          //                   width: 2,
+          //                   color: Theme.of(context).primaryColorDark))),
+          //       child: Center(
+          //           child: Text(
+          //         'Add group',
+          //         style: Theme.of(context)
+          //             .textTheme
+          //             .titleMedium!
+          //             .copyWith(color: Colors.white),
+          //       )),
+          //     ),
+          //     onTap: () {
+          //       context
+          //           .read<EmployerBloc>()
+          //           .add(AddGroupEvent(group: groups[2]));
+          //     }),
         ],
       ),
     );
