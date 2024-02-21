@@ -15,7 +15,7 @@ class LocalDataSource extends ILocalDataSource {
   Future<void> addEmployer(
       {required int groupId, required Employer employer}) async {
     final group = GroupModel.fromJson(box.getAt(groupId));
-    group.employers. add(EmployerModel.toModel(employer));
+    group.employers.add(EmployerModel.toModel(employer));
     await box.putAt(groupId, group.toJson());
   }
 
@@ -47,7 +47,7 @@ class LocalDataSource extends ILocalDataSource {
       required Employer employer}) async {
     final group = GroupModel.fromJson(box.getAt(groupId));
 
-    group.employers[employerId] = employer;
+    group.employers[employerId] = EmployerModel.toModel(employer);
     await box.put(groupId, group.toJson());
   }
 

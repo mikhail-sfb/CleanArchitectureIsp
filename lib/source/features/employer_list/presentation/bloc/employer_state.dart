@@ -18,7 +18,9 @@ final class GroupsLoaded extends GroupState {
   List<Object> get props => [
         groups.map((e) => e.groupName).toList(),
         groups.map((e) => e.color).toList(),
-        groups.map((group) => group.employers.map((e) => e.fullName).toList()).toList()
+        groups
+            .map((group) => group.employers.map((e) => e.fullName).toList())
+            .toList()
       ];
 }
 

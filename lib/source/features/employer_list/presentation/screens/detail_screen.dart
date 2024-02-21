@@ -8,7 +8,13 @@ import 'package:flutter/material.dart';
 
 class DetailEmployerScreen extends StatelessWidget {
   final Employer employer;
-  const DetailEmployerScreen({required this.employer, super.key});
+  final int groupId;
+  final int employerId;
+  const DetailEmployerScreen(
+      {required this.employer,
+      super.key,
+      required this.employerId,
+      required this.groupId});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +25,15 @@ class DetailEmployerScreen extends StatelessWidget {
       employer.importance.toString()
     ];
     return Scaffold(
-      appBar: const ApplicationBar(
+      appBar: ApplicationBar(
         title: 'Details',
-        actions: [EditButton()],
+        actions: [
+          EditButton(
+            employer: employer,
+            employerId: employerId,
+            groupId: groupId,
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 30.0, right: 30, top: 10),

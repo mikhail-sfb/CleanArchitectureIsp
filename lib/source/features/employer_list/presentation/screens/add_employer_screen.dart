@@ -7,7 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddEmployerScreen extends StatefulWidget {
   final int groupId;
-  const AddEmployerScreen({required this.groupId, super.key});
+  final Employer? employer;
+  final int? employerId;
+
+  const AddEmployerScreen(
+      {required this.groupId, super.key, this.employer, this.employerId});
 
   @override
   State<AddEmployerScreen> createState() => _AddEmployerScreenState();
@@ -34,6 +38,15 @@ class _AddEmployerScreenState extends State<AddEmployerScreen> {
           memoryImage: _picture,
           work: _work,
           fullName: _fullName);
+
+      if (widget.employerId != null && widget.employer != null) {
+        context.read<EmployerBloc>().add(EditEmployerEvent(
+            employer: newEmployer,
+            employerId: widget.employerId!,
+            groupId: widget.groupId));
+        Navigator.of(context).pop();
+        return;
+      }
 
       context.read<EmployerBloc>().add(
           AddEmployerEvent(groupId: widget.groupId, employer: newEmployer));
@@ -85,6 +98,7 @@ class _AddEmployerScreenState extends State<AddEmployerScreen> {
                   child: Column(children: [
                     TextFormField(
                         maxLength: 20,
+                        initialValue: widget.employer?.fullName ?? '',
                         cursorColor: Theme.of(context).colorScheme.secondary,
                         style: Theme.of(context)
                             .textTheme
@@ -114,7 +128,7 @@ class _AddEmployerScreenState extends State<AddEmployerScreen> {
                             return "Name is required";
                           } else if (value.trim().length <= 1) {
                             return "Please enter a valid name";
-                          }
+                          }  
                           return null;
                         },
                         onSaved: (newValue) {
@@ -122,6 +136,7 @@ class _AddEmployerScreenState extends State<AddEmployerScreen> {
                         }),
                     TextFormField(
                         maxLength: 20,
+                        initialValue: widget.employer?.work ?? '',
                         cursorColor: Theme.of(context).colorScheme.secondary,
                         style: Theme.of(context)
                             .textTheme
@@ -161,6 +176,7 @@ class _AddEmployerScreenState extends State<AddEmployerScreen> {
                         }),
                     TextFormField(
                       maxLength: 3,
+                      initialValue: widget.employer?.age.toString() ?? '',
                       keyboardType: TextInputType.number,
                       cursorColor: Theme.of(context).colorScheme.secondary,
                       style: Theme.of(context)
@@ -203,6 +219,8 @@ class _AddEmployerScreenState extends State<AddEmployerScreen> {
                     ),
                     TextFormField(
                       maxLength: 2,
+                      initialValue:
+                          widget.employer?.importance.toString() ?? '',
                       keyboardType: TextInputType.number,
                       cursorColor: Theme.of(context).colorScheme.secondary,
                       style: Theme.of(context)

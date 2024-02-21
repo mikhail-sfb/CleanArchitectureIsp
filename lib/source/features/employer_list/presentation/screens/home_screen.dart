@@ -7,14 +7,8 @@ import 'package:final_lab/source/features/employer_list/presentation/widgets/gro
 import 'package:final_lab/source/features/employer_list/presentation/widgets/app_bar/theme_change_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-//import 'package:hive/hive.dart';
-//import 'package:final_lab/core/constants/box_name.dart';
-
-List<Group> groups = [
-  const Group(groupName: 'Hi', color: 'x/ffff', employers: []),
-  const Group(groupName: 'hoi', color: 'x/ffff', employers: []),
-  const Group(groupName: 'hei', color: '0xFF42A5F5', employers: [])
-];
+// import 'package:hive/hive.dart';
+// import 'package:final_lab/core/constants/box_name.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
